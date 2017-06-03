@@ -1,0 +1,31 @@
+{
+    "name": "insolita/yii2-form-prefiller",
+    "description": "Remember user-filled form data",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "insolita",
+            "email": "webmaster100500@ya.ru"
+        }
+    ],
+    "require": {
+        "php":">=5.6",
+        "yiisoft/yii2": "~2.0.11",
+        "nesbot/carbon": "1.22.*"
+    },
+    "require-dev": {
+        "vlucas/phpdotenv": "*",
+        "yiisoft/yii2-redis": "2.*",
+        "codeception/codeception": "^2.2.3",
+        "codeception/verify": "~0.3.1",
+        "codeception/specify": "~0.4.3"
+    },
+    "suggest": {},
+    "autoload": {
+        "psr-4": {
+            "insolita\\prefiller\\": "src"
+        }
+    }
+}
