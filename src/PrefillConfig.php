@@ -8,7 +8,7 @@ namespace insolita\prefiller;
 use insolita\prefiller\contracts\IPrefillStorage;
 use insolita\prefiller\storages\BaseStorage;
 use yii\base\InvalidParamException;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\di\Instance;
 use yii\helpers\ArrayHelper;
 
@@ -17,7 +17,7 @@ use yii\helpers\ArrayHelper;
  *
  * @package insolita\prefiller
  */
-class PrefillConfig extends Object
+class PrefillConfig extends BaseObject
 {
     /**
      * @var null

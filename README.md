@@ -14,7 +14,7 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-composer require --prefer-dist insolita/yii2-form-prefiller "~0.0.1"
+composer require --prefer-dist insolita/yii2-form-prefiller "~1.0"
 ```
 
 or add

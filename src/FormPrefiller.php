@@ -5,8 +5,6 @@
 
 namespace insolita\prefiller;
 
-use yii\base\DynamicModel;
-use yii\base\InvalidCallException;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
@@ -52,9 +50,9 @@ class FormPrefiller extends BasePrefiller
     {
         $storage = !is_null($config->storage) ? $config->storage : $this->storage;
         if ($config->serialized === true) {
-            $this->fillFromStorageSerialized($model, $config, $storage,$skipIfSet);
+            $this->fillFromStorageSerialized($model, $config, $storage, $skipIfSet);
         } else {
-            $this->fillFromStorageSeparated($model, $config,$storage,$skipIfSet);
+            $this->fillFromStorageSeparated($model, $config, $storage, $skipIfSet);
         }
         return $model;
     }
@@ -66,7 +64,7 @@ class FormPrefiller extends BasePrefiller
     {
         $storage = !is_null($config->storage) ? $config->storage : $this->storage;
         if ($config->serialized === true) {
-            $formName = $config->formName??$model->formName();
+            $formName = $config->formName ?? $model->formName();
             $this->persistSerialized($model, $storage, $formName);
         } else {
             $this->persistSeparated($model, $storage);
@@ -91,11 +89,10 @@ class FormPrefiller extends BasePrefiller
         return $this->request->$method($scope);
     }
     
-    
     /**
-     * @param \yii\base\Model                   $model
+     * @param \yii\base\Model                               $model
      * @param \insolita\prefiller\contracts\IPrefillStorage $storage
-     * @param string $formName
+     * @param string                                        $formName
      */
     private function persistSerialized($model, $storage, $formName)
     {
@@ -106,7 +103,7 @@ class FormPrefiller extends BasePrefiller
     }
     
     /**
-     * @param \yii\base\Model                   $model
+     * @param \yii\base\Model                               $model
      * @param \insolita\prefiller\contracts\IPrefillStorage $storage
      */
     private function persistSeparated($model, $storage)
@@ -117,10 +114,10 @@ class FormPrefiller extends BasePrefiller
     }
     
     /**
-     * @param \yii\base\Model|\insolita\prefiller\contracts\IMemorableForm                   $model
-     * @param \insolita\prefiller\contracts\IPrefillStorage $storage
-     * @param \insolita\prefiller\PrefillConfig $config
-     * @param bool $skipIfSet
+     * @param \yii\base\Model|\insolita\prefiller\contracts\IMemorableForm $model
+     * @param \insolita\prefiller\contracts\IPrefillStorage                $storage
+     * @param \insolita\prefiller\PrefillConfig                            $config
+     * @param bool                                                         $skipIfSet
      */
     private function fillFromStorageSeparated($model, $config, $storage, $skipIfSet = true)
     {
@@ -134,15 +131,16 @@ class FormPrefiller extends BasePrefiller
             }
         }
     }
+    
     /**
-     * @param \yii\base\Model|\insolita\prefiller\contracts\IMemorableForm                   $model
-     * @param \insolita\prefiller\PrefillConfig $config
-     * @param \insolita\prefiller\contracts\IPrefillStorage $storage
-     * @param bool $skipIfSet
+     * @param \yii\base\Model|\insolita\prefiller\contracts\IMemorableForm $model
+     * @param \insolita\prefiller\PrefillConfig                            $config
+     * @param \insolita\prefiller\contracts\IPrefillStorage                $storage
+     * @param bool                                                         $skipIfSet
      */
     private function fillFromStorageSerialized($model, PrefillConfig $config, $storage, $skipIfSet = true)
     {
-        $storageData = $storage->getValue($this->storagePrefix . ($config->formName??$model->formName()), []);
+        $storageData = $storage->getValue($this->storagePrefix . ($config->formName ?? $model->formName()), []);
         $storageData = !empty($storageData) ? Json::decode($storageData) : [];
         
         foreach ($model->getAttributes() as $attribute => $value) {
@@ -157,10 +155,10 @@ class FormPrefiller extends BasePrefiller
     }
     
     /**
-     * @param   \yii\base\Model|\insolita\prefiller\contracts\IMemorableForm    $model
-     * @param       $attribute
-     * @param       $skipIfSet
-     * @param array $skipAttributes
+     * @param   \yii\base\Model|\insolita\prefiller\contracts\IMemorableForm $model
+     * @param                                                                $attribute
+     * @param                                                                $skipIfSet
+     * @param array                                                          $skipAttributes
      *
      * @return bool
      */
@@ -178,7 +176,7 @@ class FormPrefiller extends BasePrefiller
     
     /**
      * @param \yii\base\Model|\insolita\prefiller\contracts\IMemorableForm $model
-     * @param $defaults
+     * @param                                                              $defaults
      */
     private function fillDefaults($model, $defaults)
     {
@@ -198,18 +196,19 @@ class FormPrefiller extends BasePrefiller
      * @param array                                               $requestData
      * @param  Model|\insolita\prefiller\contracts\IMemorableForm $model
      * @param bool                                                $validate
+     *
      * @return bool - flag indicated that request update model
      */
     private function fillFromRequest(array $requestData, $model, $validate)
     {
         $updated = false;
-        foreach ($model->getAttributes() as $attribute=>$value){
-            if(isset($requestData[$attribute])){
+        foreach ($model->getAttributes() as $attribute => $value) {
+            if (isset($requestData[$attribute])) {
                 $model->$attribute = $requestData[$attribute];
                 if ($validate === true && !$model->validate([$attribute])) {
                     $model->clearErrors($attribute);
                     $model->$attribute = null;
-                }else{
+                } else {
                     $updated = true;
                 }
             }

@@ -6,14 +6,14 @@
 namespace insolita\prefiller\storages;
 
 use insolita\prefiller\contracts\IPrefillStorage;
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * Class BaseStorage
  *
  * @package insolita\prefiller\storages
  */
-abstract class BaseStorage extends Object implements IPrefillStorage
+abstract class BaseStorage extends BaseObject implements IPrefillStorage
 {
     
 }
