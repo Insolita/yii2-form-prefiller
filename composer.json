@@ -13,7 +13,7 @@
     "require": {
         "php":">=7.0",
         "yiisoft/yii2": "~2.0.13",
-        "nesbot/carbon": "1.22.*"
+        "nesbot/carbon": "^2.0"
     },
     "repositories": [
         {
@@ -24,7 +24,7 @@
     "require-dev": {
         "vlucas/phpdotenv": "*",
         "yiisoft/yii2-redis": "2.*",
-        "codeception/codeception": "2.3.*",
+        "codeception/codeception": "^3.1",
         "codeception/verify": "0.4.*",
         "codeception/specify": "0.4.*"
     },
